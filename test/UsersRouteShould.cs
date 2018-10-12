@@ -20,6 +20,16 @@ namespace BeautifulRestApi.Tests
         }
 
         [Fact]
+        public async Task younestest()
+        {
+            var response = await _client.GetAsync("/users");
+            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+
+            dynamic collection = JObject.Parse(await response.Content.ReadAsStringAsync());
+            Assert.True(collection.value.Count > 0);
+        }
+
+        [Fact]
         public async Task ReturnCollection()
         {
             var response = await _client.GetAsync("/users");
